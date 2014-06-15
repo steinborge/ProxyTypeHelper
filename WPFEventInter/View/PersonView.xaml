@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="WPFEventInter.View.PersonView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:rmwpfi="clr-namespace:Core.WPF.Infrastructure;assembly=Core" 
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"             
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         Height="445" Width="646">
+    <Grid x:Name="mainGrid" Margin="0,0,0,10">
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="485,31,0,0" TextWrapping="Wrap" Text="{Binding Name, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="485,62,0,0" TextWrapping="Wrap" Text="{Binding LastName, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="120"  />
+        <Label HorizontalAlignment="Left" Height="23" Margin="137,128,0,0" Content="{Binding FullName}" VerticalAlignment="Top" Width="149"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,62,0,0" TextWrapping="Wrap" Text="{Binding FirstName, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Sur Name " HorizontalAlignment="Left" Margin="20,31,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,31,0,0" TextWrapping="Wrap" Text="{Binding SurName, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="120"/>
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="137,97,0,0" TextWrapping="Wrap" Text="{Binding Height, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="120"/>
+        <DataGrid HorizontalAlignment="Left" Margin="48,186,0,0"  VerticalAlignment="Top" Height="62" Width="380" ItemsSource="{Binding Path=ContactDetails, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged,  NotifyOnSourceUpdated=True}"  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="170"  Binding="{Binding Detail}" />
+            </DataGrid.Columns>
+
+            <i:Interaction.Behaviors>
+                <rmwpfi:EventToCommandBehavior Command="{Binding AddingNewItemEvent}" Event="AddingNewItem"  PassArguments="True" />
+            </i:Interaction.Behaviors>
+        </DataGrid>
+        <TextBox HorizontalAlignment="Left" Height="66" Margin="48,259,0,0" TextWrapping="Wrap" Text="{Binding Log}"  VerticalAlignment="Top" Width="555"  />
+        <Label Content="First Name " HorizontalAlignment="Left" Margin="20,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="Height " HorizontalAlignment="Left" Margin="20,97,0,0" VerticalAlignment="Top"/>
+        <Label Content="Full Name" HorizontalAlignment="Left" Margin="20,125,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="btnRollBack" Content="Rollback changes" Command="{Binding RollBackChangesCommand}" HorizontalAlignment="Left" Margin="48,342,0,0" VerticalAlignment="Top" Width="140"  >
+        </Button>
+        <Label Content="Name " HorizontalAlignment="Left" Margin="400,31,0,0" VerticalAlignment="Top"/>
+        <Label Content="Last Name " HorizontalAlignment="Left" Margin="400,61,0,0" VerticalAlignment="Top"/>
+        <Rectangle  HorizontalAlignment="Left" Height="151" Margin="10,12,0,0" Stroke="Black" VerticalAlignment="Top" Width="292"/>
+        <Rectangle  HorizontalAlignment="Left" Height="151" Margin="379,12,0,0" Stroke="Black" VerticalAlignment="Top" Width="259"/>
+
+
+    </Grid>
+</UserControl>

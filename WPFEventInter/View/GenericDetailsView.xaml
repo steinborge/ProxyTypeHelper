@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="WPFEventInter.View.GenericDetailsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"             
+       xmlns:rmwpfi="clr-namespace:Core.WPF.Infrastructure;assembly=Core" 
+        xmlns:vms="clr-namespace:WPFEventInter.ViewModel"
+        xmlns:local="clr-namespace:WPFEventInter.UserControls"
+         Height="400" Width="631">
+    <UserControl.Resources>
+        <rmwpfi:ContentControlGenericTemplateSelector x:Key="ContentSelector" />
+    </UserControl.Resources>    
+    <StackPanel>
+        <HeaderedContentControl Style="{StaticResource SubDisplayArea}" Grid.Column="0">
+            <HeaderedContentControl.Header >
+                Cars
+            </HeaderedContentControl.Header>
+            <ScrollViewer>
+                <HeaderedContentControl>
+                    <HeaderedContentControl.Header>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                            <TextBlock Margin="2" >
+                            <Hyperlink IsEnabled="{Binding CanAdd}" Command="{Binding Path=AddRecordCommand}">Add Record</Hyperlink>
+                            | <Hyperlink IsEnabled="{Binding CanDelete}" Command="{Binding Path=DeleteRecordCommand}">Delete Record</Hyperlink>
+                            | <Hyperlink  IsEnabled="{Binding CanSave}" Command="{Binding Path=SaveChangesCommand}">Save Changes</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </HeaderedContentControl.Header>
+
+                    <ContentPresenter x:Name="contCtl" Tag="ACTL" Content="{Binding}" ContentTemplateSelector="{StaticResource ContentSelector}" >
+                    </ContentPresenter>
+                
+                </HeaderedContentControl>
+            </ScrollViewer>
+        </HeaderedContentControl>
+      
+    </StackPanel>
+</UserControl>
