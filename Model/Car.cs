@@ -15,7 +15,7 @@ namespace Model
  
         [Display(Name = "Car ID")][Required][Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("CarID")] 
-        public  Int32 CarID {get;set;}
+        public  Int64 CarID {get;set;}
 
         [Required (ErrorMessage="Car name is required")]
         [Display(Name = "Car Name")]
@@ -25,15 +25,15 @@ namespace Model
 
         [Display(Name = "Colour ID")]
         [Column("ColourID")] 
-        public  System.Nullable<Int32> ColourID {get;set;}
+        public  System.Nullable<Int64> ColourID {get;set;}
 
         [Display(Name = "Car Type ID")]
         [Column("CarTypeID")] 
-        public  System.Nullable<Int32> CarTypeID {get;set;}
+        public  System.Nullable<Int64> CarTypeID {get;set;}
 
         [Display(Name = "Brand ID")]
         [Column("BrandID")] 
-        public  System.Nullable<Int32> BrandID {get;set;}
+        public  System.Nullable<Int64> BrandID {get;set;}
 
         [Display(Name = "Release Date")]
         [Column("ReleaseDate")] 

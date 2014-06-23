@@ -15,7 +15,7 @@ namespace Model
  
         [Display(Name = "Brand ID")][Required][Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("BrandID")] 
-        public  Int32 BrandID {get;set;}
+        public  Int64 BrandID {get;set;}
 
         [Display(Name = "Brand Name")][MaxLength(50)]
         [Column("BrandName")] 

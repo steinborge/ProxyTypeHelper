@@ -31,7 +31,7 @@ namespace ProxyHelper
             {
 
                 //if validate property 
-                if (this.ValidateProperty(columnName, ref this.error)) ;
+                if (this.ValidateProperty(columnName, ref this.error)) 
                 {
                     //get the column name being validated..
                     PropertyValue propV = this.PropertyValues[columnName];

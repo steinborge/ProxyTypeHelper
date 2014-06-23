@@ -15,7 +15,7 @@ namespace Model
  
         [Display(Name = "Colour ID")][Required][Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ColourID")] 
-        public  Int32 ColourID {get;set;}
+        public  Int64 ColourID {get;set;}
 
         [Display(Name = "Colour Name")][MaxLength(50)]
         [Column("ColourName")] 

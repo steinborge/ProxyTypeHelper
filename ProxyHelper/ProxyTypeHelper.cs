@@ -1,4 +1,5 @@
-﻿using System;
+﻿// based on http://blogs.msdn.com/b/silverlight_sdk/archive/2011/04/25/binding-to-dynamic-properties-with-icustomtypeprovider-silverlight-5-beta.aspxhttp://blogs.msdn.com/b/silverlight_sdk/archive/2011/04/25/binding-to-dynamic-properties-with-icustomtypeprovider-silverlight-5-beta.aspx
+using System;
 using System.Reflection;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -6,8 +7,6 @@ using System.Collections;
 using System.Windows.Input;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 
 namespace ProxyHelper
@@ -279,7 +278,6 @@ namespace ProxyHelper
                 else // 
                 {
                     //TODO need to check if collection enumerate /object - 
-
                     if (kvp.Value.CustomProperty.IsObservable)
                     {
 
@@ -470,22 +468,7 @@ namespace ProxyHelper
 
                     viewModelObservableCollection.CustomCollectionChangedMethod = cpi.CustomProperty.ObservableCollectionChangedEvent;
 
-                    //TODO delete or use this...  
-                    if (cpi.CustomProperty.ObservableCollectionChangedEvent != null)
-                    {
-
-                        try
-                        {
-
-                      }
-                        catch (Exception ex)
-                        {
-
-
-                        }
-    
-                    }
-                    
+                   
                 }
             }
         }

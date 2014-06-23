@@ -15,7 +15,7 @@ namespace Model
  
         [Display(Name = "Car Type ID")][Required][Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("CarTypeID")] 
-        public  Int32 CarTypeID {get;set;}
+        public  Int64 CarTypeID {get;set;}
 
         [Display(Name = "Car Type Name")][MaxLength(50)]
         [Column("CarTypeName")] 

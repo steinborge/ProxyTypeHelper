@@ -25,12 +25,7 @@ namespace WPFEventInter.View
         
         {
             CarWorkspaceViewModel cwvm = new CarWorkspaceViewModel();
-
-
-
-
             DataContext = cwvm;
-
             InitializeComponent();
         }
     }
