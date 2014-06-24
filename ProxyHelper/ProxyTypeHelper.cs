@@ -714,7 +714,7 @@ namespace ProxyHelper
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+        } 
 
         /// <summary>
         /// Validates the value for the given type

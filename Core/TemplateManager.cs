@@ -16,13 +16,13 @@ namespace Core.WPF.Infrastructure
         }
 
         
-        public void RegisterDataTemplate(Type viewModelType, Type dataTemplateType, Type viewType, string Tag="")
+        public void RegisterDataTemplate(Type viewModelType, Type dataTemplateType, string Tag="")
         {
             var template = BuildDataTemplate(viewModelType, dataTemplateType) ;
             templates.Add(viewModelType.ToString() + Tag, template);
 
-            var key = template.DataTemplateKey;
-            Application.Current.Resources.Add(key, template);
+           // var key = template.DataTemplateKey;
+           // Application.Current.Resources.Add(key, template);
         }
 
         private DataTemplate BuildDataTemplate(Type viewModelType, Type viewType)

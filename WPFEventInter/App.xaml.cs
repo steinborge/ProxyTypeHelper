@@ -31,10 +31,10 @@ namespace WPFEventInter
            var manager = new Core.WPF.Infrastructure.DataTemplateManager();
 
            //store data templates associated with view models
-           manager.RegisterDataTemplate(typeof(GenericViewModel<Car, WPFEventInter.ViewModel.CarViewModel>), typeof(WPFEventInter.UserControls.CarsDetailView), typeof(WPFEventInter.View.GenericDetailsView));
-           manager.RegisterDataTemplate(typeof(GenericViewModel<Brand, WPFEventInter.ViewModel.BrandViewModel>), typeof(WPFEventInter.UserControls.BrandsDetailView), typeof(WPFEventInter.View.GenericDetailsView));
-           manager.RegisterDataTemplate(typeof(GenericViewModel<CarType, WPFEventInter.ViewModel.CarTypeViewModel>), typeof(WPFEventInter.UserControls.CarTypesView), typeof(WPFEventInter.View.GenericDetailsView));
-           manager.RegisterDataTemplate(typeof(GenericViewModel<Colour, WPFEventInter.ViewModel.ColourViewModel>), typeof(WPFEventInter.UserControls.ColoursDetailView), typeof(WPFEventInter.View.GenericDetailsView));
+           manager.RegisterDataTemplate(typeof(GenericViewModel<Car, WPFEventInter.ViewModel.CarViewModel>), typeof(WPFEventInter.UserControls.CarsDetailView));
+           manager.RegisterDataTemplate(typeof(GenericViewModel<Brand, WPFEventInter.ViewModel.BrandViewModel>), typeof(WPFEventInter.UserControls.BrandsDetailView));
+           manager.RegisterDataTemplate(typeof(GenericViewModel<CarType, WPFEventInter.ViewModel.CarTypeViewModel>), typeof(WPFEventInter.UserControls.CarTypesView));
+           manager.RegisterDataTemplate(typeof(GenericViewModel<Colour, WPFEventInter.ViewModel.ColourViewModel>), typeof(WPFEventInter.UserControls.ColoursDetailView));
 
             //initialize proxy types - go through all assembilies and find any associated proxy objects
             TypeStuff.InitializeProxyTypes();

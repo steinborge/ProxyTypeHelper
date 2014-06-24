@@ -111,8 +111,8 @@ namespace Core.WPF.Infrastructure
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            //
-            object view = GetRoot(((FrameworkElement)container).Parent);
+            //TODO remove this later
+            //object view = GetRoot(((FrameworkElement)container).Parent);
             DataTemplate retVal = null;
 
             try
