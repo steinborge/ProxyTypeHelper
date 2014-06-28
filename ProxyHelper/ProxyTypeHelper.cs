@@ -15,7 +15,7 @@ namespace ProxyHelper
     /// Custom type helper
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public partial class ProxyTypeHelper<T> : ICustomTypeProvider, INotifyPropertyChanged, ICustomObjectProxyObjects, IIsDirty
+    public partial class ProxyTypeHelper<T> : ProxyLinker, ICustomTypeProvider, INotifyPropertyChanged, ICustomObjectProxyObjects, IIsDirty
     {
         static Dictionary <string,List<string>> linkedProperties = new Dictionary<string,List<string>> ();
         public static Dictionary<string, MethodInfo> linkedOC = new Dictionary<string, MethodInfo>();
@@ -158,7 +158,9 @@ namespace ProxyHelper
 
             //if propery change event method flagged via attribute assign the method to event
             if (PropertyChangedMethod != null)
-                PropertyChanged = (PropertyChangedEventHandler)Delegate.CreateDelegate(typeof(PropertyChangedEventHandler), this, PropertyChangedMethod, true); 
+                SetPropertyChangedEventHandler((PropertyChangedEventHandler)Delegate.CreateDelegate(typeof(PropertyChangedEventHandler), this, PropertyChangedMethod, true));
+                //*PropertyChanged = (PropertyChangedEventHandler)Delegate.CreateDelegate(typeof(PropertyChangedEventHandler), this, PropertyChangedMethod, true); 
+
 
             //loop through each class property and generate an instance
             foreach (var property in GetCustomType().GetProperties())
@@ -458,7 +460,7 @@ namespace ProxyHelper
                         object avalue = iEnumerator.Current;
                         
                         ddadd.SetValue(avalue.GetType(), avalue);
-                        ((INotifyPropertyChanged)ddadd).PropertyChanged += PropertyChanged;
+                        ((INotifyPropertyChanged)ddadd).PropertyChanged += _PropertyChanged;
                         viewModelObservableCollection.Add(ddadd);
   
                     }
@@ -494,7 +496,7 @@ namespace ProxyHelper
                     ((ICustomObjectProxyObjects)obj).SetValue(customOC.ModelType,newObject );
 
 
-                        ((INotifyPropertyChanged)obj).PropertyChanged += PropertyChanged;
+                        ((INotifyPropertyChanged)obj).PropertyChanged += _PropertyChanged;
 
 
                     //add to underlying proxy collection..
@@ -507,7 +509,7 @@ namespace ProxyHelper
                 //loop through and remove from proxy object
                 foreach (ICustomObjectProxyObjects obj in e.OldItems)
                 {
-                    ((INotifyPropertyChanged)obj).PropertyChanged -= PropertyChanged;
+                    ((INotifyPropertyChanged)obj).PropertyChanged -= _PropertyChanged;
 
                     ((IList)customOC.ProxyObject).Remove(obj.GetProxyObjects().Values.ToList()[0]);
                 }
@@ -705,15 +707,15 @@ namespace ProxyHelper
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        //*public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         /// <summary>
         /// Raises a property change notification
         /// </summary>
         /// <param name="propertyName"></param>
-        protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
+        protected void xRaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            _PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         } 
 
         /// <summary>

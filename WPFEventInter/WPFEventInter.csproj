@@ -203,6 +203,10 @@
       <Project>{8bd45110-0308-4b16-8b8d-ec9bc8a587a6}</Project>
       <Name>ProxyHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProxyLinker\ProxyLinker.csproj">
+      <Project>{6a5f4a83-9f19-4072-bf88-d421806810ba}</Project>
+      <Name>ProxyLinker</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="x64\SQLite.Interop.dll">
