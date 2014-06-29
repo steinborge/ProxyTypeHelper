@@ -154,6 +154,7 @@ namespace WPFEventInter.ViewModel
             {
                 _repository.SaveChanges();
             }
+            //TODO: show an error message 
             catch (Exception ex)
             {
 
@@ -178,7 +179,7 @@ namespace WPFEventInter.ViewModel
         U currentRecord;
 
         [PropertyChangedEvent]
-        void _PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void PropertyChangedEvt(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "CanDelete" && e.PropertyName != "CanSave" ) 
                 IsRecordDirty = true; 

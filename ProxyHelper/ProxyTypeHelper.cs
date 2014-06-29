@@ -159,7 +159,6 @@ namespace ProxyHelper
             //if propery change event method flagged via attribute assign the method to event
             if (PropertyChangedMethod != null)
                 SetPropertyChangedEventHandler((PropertyChangedEventHandler)Delegate.CreateDelegate(typeof(PropertyChangedEventHandler), this, PropertyChangedMethod, true));
-                //*PropertyChanged = (PropertyChangedEventHandler)Delegate.CreateDelegate(typeof(PropertyChangedEventHandler), this, PropertyChangedMethod, true); 
 
 
             //loop through each class property and generate an instance
@@ -208,11 +207,13 @@ namespace ProxyHelper
                             {
                                 Type[] types = { actionType };
                                 object[] param = { openDelegate };
-                                command = cpi.ActionMethodType.GetConstructor(types).Invoke(param) as ICommand; //param
+                                
+                                command = CreateActionCommandWithArguments(cpi.ActionMethodType,types,param);
+
                             }
                             else
-                                command = new RelayCommand((Action)openDelegate);
-
+                                command = CreateActionCommand((Action)openDelegate);
+                            
                             propVal.Value = command;
 
                         }
@@ -475,8 +476,6 @@ namespace ProxyHelper
             }
         }
 
-
-
         /// <summary>
         /// Fires when any proxy ObservableCollection objects changes (additions/deletions).
         /// </summary>
@@ -703,20 +702,6 @@ namespace ProxyHelper
         {
             return _ctype.Value;
         }
-        
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        //*public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        /// <summary>
-        /// Raises a property change notification
-        /// </summary>
-        /// <param name="propertyName"></param>
-        protected void xRaisePropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            _PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        } 
 
         /// <summary>
         /// Validates the value for the given type
@@ -778,8 +763,6 @@ namespace ProxyHelper
         {
             return String.Format( "Dirty:{0}  {1}", IsDirty, Value.ToString());
         }
-
-
 
     }
 

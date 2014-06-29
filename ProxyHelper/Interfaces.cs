@@ -53,43 +53,10 @@ namespace ProxyHelper
         public Type ModelType { get; set; }
         public object ProxyObject { get; set; }
         public MethodInfo  CustomCollectionChangedMethod {get;set;}
-        public event NotifyCollectionChangedEventHandler CollectionChangedEvent;
+        //public event NotifyCollectionChangedEventHandler CollectionChangedEvent;
         public event NotifyCollectionChangedEventHandler CustomCollectionChanged;
     }
 
     
-    class RelayCommand : ICommand
-    {
-        private Action _action;
-        public event EventHandler CanExecuteChanged;
-
-
-        public RelayCommand(Action action)
-        {
-            _action = action;
-        }
-
-        #region ICommand Members
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-
-        public void Execute(object parameter)
-        {
-            if (parameter != null)
-            {
-                _action();
-            }
-            else
-            {
-                _action(); 
-            }
-        }
-
-        #endregion
-    }
 
 }
