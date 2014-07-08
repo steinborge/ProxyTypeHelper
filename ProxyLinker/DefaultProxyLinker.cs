@@ -8,7 +8,6 @@ namespace ProxyHelper
 {
     public class ProxyLinker
     {
-        protected List<PropertyChangedEventHandler> _PropertyChangedSubscribers = new List<PropertyChangedEventHandler>();
         protected PropertyChangedEventHandler _PropertyChanged;
 
         //TODO Add some cleanup logic to ensure all subscribers are gone- add to interface  
@@ -18,17 +17,14 @@ namespace ProxyHelper
             add
             {
                 //make sure not subscribing twice
-                if (!_PropertyChangedSubscribers.Contains(value))
+                if (_PropertyChanged == null ||
+                    Array.FindIndex(_PropertyChanged.GetInvocationList(), 
+                                    a => (PropertyChangedEventHandler) a == value) == -1)
                 {
                     _PropertyChanged += value;
-                    _PropertyChangedSubscribers.Add(value);
                 }
             }
-            remove
-            {
-                _PropertyChanged -= value;
-                _PropertyChangedSubscribers.Remove(value);
-            }
+            remove { _PropertyChanged -= value; }
         }
 
         /// <summary>
@@ -45,7 +41,7 @@ namespace ProxyHelper
             _PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected ICommand CreateActionCommandWithArguments(Type actionMethodType,System.Type[] types, object[] param)
+        protected ICommand CreateActionCommandWithArguments(Type actionMethodType, System.Type[] types, object[] param)
         {
             return actionMethodType.GetConstructor(types).Invoke(param) as ICommand;
         }
@@ -54,7 +50,6 @@ namespace ProxyHelper
         {
             return new Core.RelayCommand(action);
         }
-
     }
 }
 
