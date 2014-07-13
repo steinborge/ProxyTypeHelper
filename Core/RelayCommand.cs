@@ -28,14 +28,7 @@ namespace Core
 
         public void Execute(object parameter)
         {
-            if (parameter != null)
-            {
-                _action();
-            }
-            else
-            {
-                _action();
-            }
+            _action();
         }
 
         #endregion
