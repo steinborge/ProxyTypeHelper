@@ -40,6 +40,8 @@ namespace ProxyHelper
 
     }
 
+
+
     public class LinkToEvent : System.Attribute, INamedAttribute
     {
         private string eventName;
@@ -50,6 +52,31 @@ namespace ProxyHelper
             eventName = EventName;
         }
     }
+
+
+    public class DefaultValue : System.Attribute
+    {
+        private object  value;
+        public object Value { get { return value; } }
+
+        public DefaultValue(object Value)
+        {
+            value = Value;
+        }
+    }
+
+    [System.AttributeUsage(System.AttributeTargets.Property, AllowMultiple = true)]
+    public class AddLookup: System.Attribute
+    {
+        private string lookupName;
+        public String LookupName { get { return lookupName; } }
+
+        public AddLookup(string LookupName)
+        {
+            lookupName = LookupName;
+        }
+    }
+
 
     [System.AttributeUsage(System.AttributeTargets.Property,AllowMultiple = true)  ]
     public class LinkToProperty : System.Attribute, INamedAttribute

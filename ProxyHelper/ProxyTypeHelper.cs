@@ -34,6 +34,9 @@ namespace ProxyHelper
                 //determine if not mapped..
                 bool notMapped = property.IsDefined(typeof(NotMapped),false);
 
+
+
+
                 bool linkedProperty= property.IsDefined(typeof(LinkToProperty), false);
 
                 //if property is linked to other 
@@ -57,6 +60,7 @@ namespace ProxyHelper
                     }
                 }
 
+
                 CustomPropertyInfoHelper cpi = new CustomPropertyInfoHelper(ownerType, property,notMapped);
                 Type propertyType = property.PropertyType;//  property.GetType();
                 cpi.IsPrimitive =   (propertyType.IsPrimitive || propertyType == typeof(Decimal)
@@ -73,7 +77,17 @@ namespace ProxyHelper
                 cpi.ProxyGetMethod = ownerType.GetMethods().Single(m => m.Name == "get_" + property.Name && !m.IsGenericMethod);
                 cpi.ProxySetMethod = ownerType.GetMethod("set_" + property.Name);
                 cpi.ProxyPropertyInfo = property;
-                
+
+
+                //if property has default value set via attribute
+                if (property.IsDefined(typeof(DefaultValue), false))
+                {
+
+
+                    object defaultValue = ((DefaultValue)(property.GetCustomAttributes(typeof(DefaultValue), true)[0])).Value;
+                    cpi.DefaultValue = defaultValue;
+                }
+
 
                 CustomProperties.Add(property.Name, cpi);
              }
@@ -599,7 +613,7 @@ namespace ProxyHelper
                             //if proxy object not set then create new instance
                             if (propVal.ProxyObject == null)
                             {
-                                propVal.ProxyObject = propertyInfo.ProxyObjectType.GetConstructor(Type.EmptyTypes).Invoke(null); //dynamic newObject 
+                                propVal.ProxyObject = propertyInfo.ProxyObjectType.GetConstructor(Type.EmptyTypes).Invoke(null);  
 
                                 SetValue(propertyInfo.ProxyObjectType, propVal.ProxyObject); 
 

@@ -18,6 +18,10 @@ namespace WPFEventInter
         
         }
 
+        [DefaultValue(true)]
+        public bool Active { get; set; }
+
+
 
         /// <summary>
         /// demonstrating class property - note no property change event fired
